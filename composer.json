@@ -1,0 +1,40 @@
+{
+  "name": "vragovr/safecrow-api",
+  "description": "SafeCrow API v3 Client",
+  "version": "0.0.1",
+  "type": "library",
+  "keywords": [
+    "http",
+    "api",
+    "SafeCrow"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Roman Vragov",
+      "email": "vragovR@yandex.ru"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "psr/http-message": "^1.0",
+    "php-http/client-implementation": "^1.0",
+    "php-http/httplug": "^1.0",
+    "php-http/message": "^1.0",
+    "php-http/discovery": "^1.0",
+    "symfony/options-resolver": "^3.0 || ^4.0"
+  },
+  "require-dev": {
+    "php-http/mock-client": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "SafeCrow\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SafeCrow\\": "tests/"
+    }
+  }
+}
