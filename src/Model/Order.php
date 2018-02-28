@@ -28,6 +28,21 @@ class Order
     const STATUS_PENDING = 'pending';
 
     /**
+     * @var string
+     */
+    const METHOD_FULL = 'full';
+
+    /**
+     * @var string
+     */
+    const METHOD_COMMISSION = 'with_commission';
+
+    /**
+     * @var string
+     */
+    const METHOD_PENALTY = 'with_penalty';
+
+    /**
      * @var int
      */
     private $id;

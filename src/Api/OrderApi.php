@@ -69,18 +69,31 @@ class OrderApi extends AbstractApi
      */
     public function pay(int $id) : string
     {
-        $response = $this->post('/order/'.$id.'/pay');
+        $response = $this->post('/orders/'.$id.'/pay');
 
         return $this->getSingleResult($response, 'payment_url');
     }
 
     /**
-     * @param int $id
+     * @param int   $id
+     * @param array $params
      * @return Order
      */
-    public function cancel(int $id): Order
+    public function cancel(int $id, array $params): Order
     {
-        $response = $this->post('/orders/'.$id.'/cancel');
+        $resolver = new OptionsResolver();
+        $resolver
+            ->setRequired([
+                'reason',
+                'method',
+            ])
+            ->setAllowedTypes('reason', 'string')
+            ->setAllowedTypes('method', 'string')
+            ->setAllowedValues('method', [Order::METHOD_FULL, Order::METHOD_COMMISSION, Order::METHOD_PENALTY]);
+
+        $params = $resolver->resolve($params);
+
+        $response = $this->post('/orders/'.$id.'/cancel', $params);
 
         return $this->getResult($response, new OrderDataTransformer());
     }
@@ -91,7 +104,7 @@ class OrderApi extends AbstractApi
      */
     public function close(int $id) : Order
     {
-        $response = $this->post('/orders/'.$id.'/close');
+        $response = $this->get('/orders/'.$id.'/close');
 
         return $this->getResult($response, new OrderDataTransformer());
     }
@@ -121,9 +134,9 @@ class OrderApi extends AbstractApi
      * @param int   $userId
      * @param int   $orderId
      * @param array $params
-     * @return string
+     * @return Order
      */
-    public function bind(int $userId, int $orderId, array $params) : string
+    public function bind(int $userId, int $orderId, array $params) : Order
     {
         $resolver = new OptionsResolver();
         $resolver
@@ -134,7 +147,7 @@ class OrderApi extends AbstractApi
 
         $params = $resolver->resolve($params);
 
-        $response = $this->post('/user/'.$userId.'/order/'.$orderId.'/bind_card', $params);
+        $response = $this->post('/users/'.$userId.'/orders/'.$orderId.'/bind_card', $params);
 
         return $this->getResult($response, new OrderDataTransformer());
     }

@@ -44,7 +44,7 @@ class AbstractApi implements ApiInterface
      */
     protected function post(string $path, array $parameters = []): ResponseInterface
     {
-        return $this->client->getHttpClient()->post($path, [], json_encode($parameters));
+        return $this->client->getHttpClient()->post($path, [], $parameters ? json_encode($parameters) : null);
     }
 
     /**
@@ -54,7 +54,7 @@ class AbstractApi implements ApiInterface
      */
     protected function path(string $path, array $parameters = []): ResponseInterface
     {
-        return $this->client->getHttpClient()->patch($path, [], json_encode($parameters));
+        return $this->client->getHttpClient()->patch($path, [], $parameters ? json_encode($parameters) : null);
     }
 
     /**

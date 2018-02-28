@@ -62,7 +62,7 @@ class UserApi extends AbstractApi
 
         $params = array_filter($resolver->resolve($params));
 
-        $response = $this->post('/user/'.$id, $params);
+        $response = $this->post('/users/'.$id, $params);
 
         return $this->getResult($response, new UserDataTransformer());
     }
@@ -83,7 +83,7 @@ class UserApi extends AbstractApi
      */
     public function show(int $id): User
     {
-        $response = $this->get('/user/'.$id);
+        $response = $this->get('/users/'.$id);
 
         return $this->getResult($response, new UserDataTransformer());
     }
@@ -94,18 +94,28 @@ class UserApi extends AbstractApi
      */
     public function orders(int $id): array
     {
-        $response = $this->get('/user/'.$id.'/orders');
+        $response = $this->get('/users/'.$id.'/orders');
 
         return $this->getArrayResult($response, new OrderDataTransformer());
     }
 
     /**
-     * @param int $id
+     * @param int   $id
+     * @param array $params
      * @return string
      */
-    public function bind(int $id): string
+    public function bind(int $id, array $params): string
     {
-        $response = $this->post('/user/'.$id.'/bind_card');
+        $resolver = new OptionsResolver();
+        $resolver
+            ->setRequired([
+                'redirect_url',
+            ])
+            ->setAllowedTypes('redirect_url', 'string');
+
+        $params = $resolver->resolve($params);
+
+        $response = $this->post('/users/'.$id.'/bind_card', $params);
 
         return $this->getSingleResult($response, 'card_binding_url');
     }
@@ -116,7 +126,7 @@ class UserApi extends AbstractApi
      */
     public function cards(int $id): array
     {
-        $response = $this->get('/user/'.$id.'/cards');
+        $response = $this->get('/users/'.$id.'/cards');
 
         return $this->getArrayResult($response, new CardDataTransformer());
     }
@@ -127,7 +137,7 @@ class UserApi extends AbstractApi
      */
     public function cardsConfirmed(int $id): array
     {
-        $response = $this->get('/user/'.$id.'/cards/confirmed');
+        $response = $this->get('/users/'.$id.'/cards/confirmed');
 
         return $this->getArrayResult($response, new CardDataTransformer());
     }
