@@ -16,6 +16,7 @@ use SafeCrow\Api\OrderApi;
 use SafeCrow\Api\UserApi;
 use SafeCrow\Plugin\ApiVersionPlugin;
 use SafeCrow\Plugin\AuthenticationPlugin;
+use SafeCrow\Plugin\ErrorExceptionPlugin;
 
 /**
  * Class Client
@@ -66,6 +67,7 @@ class Client
     public function authenticate(Config $config): void
     {
         $this
+            ->addPlugin(new ErrorExceptionPlugin())
             ->addPlugin(new AddHostPlugin(UriFactoryDiscovery::find()->createUri($config->getUrl())))
             ->addPlugin(new HeaderDefaultsPlugin($config->getHeaders()))
             ->addPlugin(new ApiVersionPlugin())

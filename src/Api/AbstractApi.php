@@ -84,7 +84,7 @@ class AbstractApi implements ApiInterface
      */
     protected function getResult(ResponseInterface $response, DataTransformerInterface $dataTransformer)
     {
-        $result = json_decode($response->getBody(), true);
+        $result = (array) json_decode($response->getBody(), true);
 
         return $dataTransformer->transform($result);
     }
