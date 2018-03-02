@@ -48,6 +48,8 @@ class ErrorExceptionPlugin implements Plugin
                     if (\is_array($errors)) {
                         throw new CustomErrorException(reset($errors));
                     }
+
+                    throw new CustomErrorException($errors);
             }
 
             throw new UndefinedResultException(sprintf('Undefined result. Response Status: %s.', $response->getStatusCode()));

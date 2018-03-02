@@ -13,6 +13,7 @@ use Http\Discovery\MessageFactoryDiscovery;
 use Http\Discovery\UriFactoryDiscovery;
 use Http\Message\RequestFactory;
 use SafeCrow\Api\OrderApi;
+use SafeCrow\Api\SettingApi;
 use SafeCrow\Api\UserApi;
 use SafeCrow\Plugin\ApiVersionPlugin;
 use SafeCrow\Plugin\AuthenticationPlugin;
@@ -88,6 +89,14 @@ class Client
     public function getOrderApi(): OrderApi
     {
         return new OrderApi($this);
+    }
+
+    /**
+     * @return SettingApi
+     */
+    public function getSettingApi(): SettingApi
+    {
+        return new SettingApi($this);
     }
 
     /**

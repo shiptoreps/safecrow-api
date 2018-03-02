@@ -110,8 +110,8 @@ class AbstractApi implements ApiInterface
      */
     protected function getSingleResult(ResponseInterface $response, string $field): string
     {
-        $results = (array) json_decode($response->getBody(), true);
+        $result = (array) json_decode($response->getBody(), true);
 
-        return $results[$field];
+        return $result[$field];
     }
 }

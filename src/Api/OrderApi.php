@@ -64,14 +64,45 @@ class OrderApi extends AbstractApi
     }
 
     /**
-     * @param int $id
+     * @param int   $id
+     * @param array $params
      * @return string
      */
-    public function pay(int $id) : string
+    public function pay(int $id, array $params) : string
     {
-        $response = $this->post('/orders/'.$id.'/pay');
+        $resolver = new OptionsResolver();
+        $resolver
+            ->setRequired([
+                'redirect_url',
+            ])
+            ->setAllowedTypes('redirect_url', 'string');
 
-        return $this->getSingleResult($response, 'payment_url');
+        $params = $resolver->resolve($params);
+
+        $response = $this->post('/orders/'.$id.'/pay', $params);
+
+        return $this->getSingleResult($response, 'redirect_url');
+    }
+
+    /**
+     * @param int   $id
+     * @param array $params
+     * @return Order
+     */
+    public function annul(int $id, array $params) : Order
+    {
+        $resolver = new OptionsResolver();
+        $resolver
+            ->setRequired([
+                'reason',
+            ])
+            ->setAllowedTypes('reason', 'string');
+
+        $params = $resolver->resolve($params);
+
+        $response = $this->post('/orders/'.$id.'/annul', $params);
+
+        return $this->getResult($response, new OrderDataTransformer());
     }
 
     /**

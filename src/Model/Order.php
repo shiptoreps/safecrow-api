@@ -30,6 +30,16 @@ class Order
     /**
      * @var string
      */
+    const STATUS_PAID = 'paid';
+
+    /**
+     * @var string
+     */
+    const STATUS_ANNULLED = 'annulled';
+
+    /**
+     * @var string
+     */
     const METHOD_FULL = 'full';
 
     /**
