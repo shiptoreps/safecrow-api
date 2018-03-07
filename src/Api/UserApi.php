@@ -117,27 +117,24 @@ class UserApi extends AbstractApi
 
         $response = $this->post('/users/'.$id.'/bind_card', $params);
 
-        return $this->getSingleResult($response, 'card_binding_url');
+        return $this->getSingleResult($response, 'redirect_url');
     }
 
     /**
-     * @param int $id
+     * @param int   $id
+     * @param array $params
      * @return array
      */
-    public function cards(int $id): array
+    public function cards(int $id, array $params = []): array
     {
-        $response = $this->get('/users/'.$id.'/cards');
+        $resolver = new OptionsResolver();
+        $resolver
+            ->setDefault('all', null)
+            ->setAllowedTypes('all', ['bool', 'null']);
 
-        return $this->getArrayResult($response, new CardDataTransformer());
-    }
+        $params = array_filter($resolver->resolve($params));
 
-    /**
-     * @param int $id
-     * @return array
-     */
-    public function cardsConfirmed(int $id): array
-    {
-        $response = $this->get('/users/'.$id.'/cards/confirmed');
+        $response = $this->get('/users/'.$id.'/cards', $params);
 
         return $this->getArrayResult($response, new CardDataTransformer());
     }

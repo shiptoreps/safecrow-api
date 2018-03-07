@@ -15,11 +15,6 @@ class Card
     /**
      * @var string
      */
-    private $binding;
-
-    /**
-     * @var string
-     */
     private $holder;
 
     /**
@@ -30,27 +25,12 @@ class Card
     /**
      * @var \DateTime
      */
-    private $expirationAt;
-
-    /**
-     * @var string
-     */
-    private $status;
+    private $expireAt;
 
     /**
      * @var \DateTime
      */
     private $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    private $updatedAt;
-
-    /**
-     * @var int
-     */
-    private $userId;
 
     /**
      * @return int
@@ -67,25 +47,6 @@ class Card
     public function setId(int $id): Card
     {
         $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBinding(): string
-    {
-        return $this->binding;
-    }
-
-    /**
-     * @param string $binding
-     * @return Card
-     */
-    public function setBinding(string $binding): Card
-    {
-        $this->binding = $binding;
 
         return $this;
     }
@@ -131,37 +92,18 @@ class Card
     /**
      * @return \DateTime
      */
-    public function getExpirationAt(): \DateTime
+    public function getExpireAt(): \DateTime
     {
-        return $this->expirationAt;
+        return $this->expireAt;
     }
 
     /**
-     * @param \DateTime $expirationAt
+     * @param \DateTime $expireAt
      * @return Card
      */
-    public function setExpirationAt(\DateTime $expirationAt): Card
+    public function setExpireAt(\DateTime $expireAt): Card
     {
-        $this->expirationAt = $expirationAt;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStatus(): string
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param string $status
-     * @return Card
-     */
-    public function setStatus(string $status): Card
-    {
-        $this->status = $status;
+        $this->expireAt = $expireAt;
 
         return $this;
     }
@@ -181,44 +123,6 @@ class Card
     public function setCreatedAt(\DateTime $createdAt): Card
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt(): \DateTime
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @param \DateTime $updatedAt
-     * @return Card
-     */
-    public function setUpdatedAt(\DateTime $updatedAt): Card
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getUserId(): int
-    {
-        return $this->userId;
-    }
-
-    /**
-     * @param int $userId
-     * @return Card
-     */
-    public function setUserId(int $userId): Card
-    {
-        $this->userId = $userId;
 
         return $this;
     }
