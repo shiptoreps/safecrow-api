@@ -48,7 +48,7 @@ class Config
     {
         $this->key = $key;
         $this->secret = $secret;
-        $this->dev = true;
+        $this->dev = $dev;
         $this->headers = [
             'Content-Type' => 'application/json',
             'Accept' => 'application/json'
