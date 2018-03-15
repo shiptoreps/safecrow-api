@@ -65,7 +65,7 @@ class Client
     /**
      * @param Config $config
      */
-    public function authenticate(Config $config): void
+    public function authenticate(Config $config)
     {
         $this
             ->addPlugin(new ErrorExceptionPlugin())
