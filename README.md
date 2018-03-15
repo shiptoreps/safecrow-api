@@ -13,7 +13,7 @@ Installation
 ### 1: Download
 
 ```bash
-$ composer require vragovr/safecrow-api "dev-master"
+$ composer require vragovr/safecrow-api "^1.0"
 ```
 
 ### 2: Configure
