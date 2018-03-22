@@ -116,11 +116,8 @@ class OrderApi extends AbstractApi
         $resolver
             ->setRequired([
                 'reason',
-                'method',
             ])
-            ->setAllowedTypes('reason', 'string')
-            ->setAllowedTypes('method', 'string')
-            ->setAllowedValues('method', [Order::METHOD_FULL, Order::METHOD_COMMISSION, Order::METHOD_PENALTY]);
+            ->setAllowedTypes('reason', 'string');
 
         $params = $resolver->resolve($params);
 

@@ -94,7 +94,6 @@ $order = $client->getOrderApi()->annul([
 # Cancel order
 $order = $client->getOrderApi()->cancel([
     'reason' => 'reason...',
-    'method' => Order::METHOD_FULL, // or Order::METHOD_COMMISSION or Order::METHOD_PENALTY
 ]);
 
 # Close order
