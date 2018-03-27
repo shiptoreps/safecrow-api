@@ -188,7 +188,7 @@ class OrderApi extends AbstractApi
 
         $params = $resolver->resolve($params);
 
-        $response = $this->post('/users/'.$userId.'/orders/'.$orderId.'/bind_card', $params);
+        $response = $this->post('/users/'.$userId.'/orders/'.$orderId, $params);
 
         return $this->getResult($response, new OrderDataTransformer());
     }
