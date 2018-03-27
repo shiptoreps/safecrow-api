@@ -24,16 +24,19 @@ class OrderApi extends AbstractApi
                 'supplier_id',
                 'price',
                 'description',
-                'fee_payer',
+                'service_cost_payer',
                 'extra',
+            ])
+            ->setDefaults([
+                'extra' => null,
             ])
             ->setAllowedTypes('consumer_id', 'int')
             ->setAllowedTypes('supplier_id', 'int')
             ->setAllowedTypes('price', 'int')
             ->setAllowedTypes('description', 'string')
-            ->setAllowedTypes('fee_payer', 'string')
-            ->setAllowedTypes('extra', 'array')
-            ->setAllowedValues('fee_payer', [Order::PAYER_HALF, Order::PAYER_CONSUMER, Order::PAYER_SUPPLIER]);
+            ->setAllowedTypes('service_cost_payer', 'string')
+            ->setAllowedTypes('extra', ['array', 'null'])
+            ->setAllowedValues('service_cost_payer', [Order::PAYER_HALF, Order::PAYER_CONSUMER, Order::PAYER_SUPPLIER]);
 
         $params = $resolver->resolve($params);
 
@@ -127,22 +130,11 @@ class OrderApi extends AbstractApi
     }
 
     /**
-     * @param int $id
-     * @return Order
-     */
-    public function close(int $id) : Order
-    {
-        $response = $this->get('/orders/'.$id.'/close');
-
-        return $this->getResult($response, new OrderDataTransformer());
-    }
-
-    /**
      * @param int   $id
      * @param array $params
      * @return Order
      */
-    public function exception(int $id, array $params) : Order
+    public function close(int $id, array $params) : Order
     {
         $resolver = new OptionsResolver();
         $resolver
@@ -153,7 +145,28 @@ class OrderApi extends AbstractApi
 
         $params = $resolver->resolve($params);
 
-        $response = $this->post('/orders/'.$id.'/exception', $params);
+        $response = $this->post('/orders/'.$id.'/close', $params);
+
+        return $this->getResult($response, new OrderDataTransformer());
+    }
+
+    /**
+     * @param int   $id
+     * @param array $params
+     * @return Order
+     */
+    public function escalate(int $id, array $params) : Order
+    {
+        $resolver = new OptionsResolver();
+        $resolver
+            ->setRequired([
+                'reason',
+            ])
+            ->setAllowedTypes('reason', 'string');
+
+        $params = $resolver->resolve($params);
+
+        $response = $this->post('/orders/'.$id.'/escalate', $params);
 
         return $this->getResult($response, new OrderDataTransformer());
     }

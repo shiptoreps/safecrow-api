@@ -60,12 +60,12 @@ class Order
     /**
      * @var int
      */
-    private $fee;
+    private $consumerServiceCost;
 
     /**
-     * @var string
+     * @var int
      */
-    private $feePayer;
+    private $supplierServiceCost;
 
     /**
      * @var string
@@ -83,19 +83,9 @@ class Order
     private $supplierPayoutMethodId;
 
     /**
-     * @var int|null
-     */
-    private $consumerPayoutMethodId;
-
-    /**
      * @var string|null
      */
     private $supplierPayoutMethodType;
-
-    /**
-     * @var string|null
-     */
-    private $consumerPayoutMethodType;
 
     /**
      * @var \DateTime
@@ -191,37 +181,37 @@ class Order
     /**
      * @return int
      */
-    public function getFee(): int
+    public function getConsumerServiceCost(): int
     {
-        return $this->fee;
+        return $this->consumerServiceCost;
     }
 
     /**
-     * @param int $fee
+     * @param int $consumerServiceCost
      * @return Order
      */
-    public function setFee(int $fee): Order
+    public function setConsumerServiceCost(int $consumerServiceCost): Order
     {
-        $this->fee = $fee;
+        $this->consumerServiceCost = $consumerServiceCost;
 
         return $this;
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getFeePayer(): string
+    public function getSupplierServiceCost(): int
     {
-        return $this->feePayer;
+        return $this->supplierServiceCost;
     }
 
     /**
-     * @param string $feePayer
+     * @param int $supplierServiceCost
      * @return Order
      */
-    public function setFeePayer(string $feePayer): Order
+    public function setSupplierServiceCost(int $supplierServiceCost): Order
     {
-        $this->feePayer = $feePayer;
+        $this->supplierServiceCost = $supplierServiceCost;
 
         return $this;
     }
@@ -284,25 +274,6 @@ class Order
     }
 
     /**
-     * @return int|null
-     */
-    public function getConsumerPayoutMethodId()
-    {
-        return $this->consumerPayoutMethodId;
-    }
-
-    /**
-     * @param int|null $consumerPayoutMethodId
-     * @return Order
-     */
-    public function setConsumerPayoutMethodId($consumerPayoutMethodId): Order
-    {
-        $this->consumerPayoutMethodId = $consumerPayoutMethodId;
-
-        return $this;
-    }
-
-    /**
      * @return string|null
      */
     public function getSupplierPayoutMethodType()
@@ -317,25 +288,6 @@ class Order
     public function setSupplierPayoutMethodType($supplierPayoutMethodType): Order
     {
         $this->supplierPayoutMethodType = $supplierPayoutMethodType;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getConsumerPayoutMethodType()
-    {
-        return $this->consumerPayoutMethodType;
-    }
-
-    /**
-     * @param string|null $consumerPayoutMethodType
-     * @return Order
-     */
-    public function setConsumerPayoutMethodType($consumerPayoutMethodType): Order
-    {
-        $this->consumerPayoutMethodType = $consumerPayoutMethodType;
 
         return $this;
     }

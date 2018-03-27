@@ -43,13 +43,13 @@ class ErrorExceptionPlugin implements Plugin
                     throw new NotFoundResultException('Result not found.');
                 case self::STATUS_ERROR:
                     $result = json_decode($response->getBody(), true);
-                    $errors = reset($result['errors']);
+                    $errors = (array) reset($result['errors']);
 
-                    if (\is_array($errors)) {
-                        throw new CustomErrorException(reset($errors));
+                    foreach ($errors as $field => $error) {
+                        $errors[$field] = "Field `{$field}` has error `{$error}`";
                     }
 
-                    throw new CustomErrorException($errors);
+                    throw new CustomErrorException(implode(', ', $errors));
             }
 
             throw new UndefinedResultException(sprintf('Undefined result. Response Status: %s.', $response->getStatusCode()));

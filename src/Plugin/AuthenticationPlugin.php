@@ -43,10 +43,22 @@ class AuthenticationPlugin implements Plugin
     {
         switch ($request->getMethod()) {
             case 'POST':
-                $data = sprintf('%s%s%s%s', $this->key, 'POST', $request->getUri()->getPath(), (string) $request->getBody());
+                $data = sprintf(
+                    '%s%s%s%s',
+                    $this->key,
+                    'POST',
+                    $request->getUri()->getPath(),
+                    (string) $request->getBody()
+                );
                 break;
             case 'GET':
-                $data = sprintf('%s%s%s', $this->key, 'GET', $request->getUri()->getPath());
+                $data = sprintf(
+                    '%s%s%s%s',
+                    $this->key,
+                    'GET',
+                    $request->getUri()->getPath(),
+                    $request->getUri()->getQuery() ? '?'.$request->getUri()->getQuery() : null
+                );
                 break;
             default:
                 throw new \LogicException('Invalid Method');

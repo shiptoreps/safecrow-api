@@ -71,8 +71,7 @@ $order = $client->getOrderApi()->add([
     'supplier_id' => 2,
     'price' => 10000,
     'description' => 'description...',
-    'fee_payer' => Order::PAYER_HALF, // or Order::PAYER_CONSUMER or Order::PAYER_SUPPLIER
-    'extra' => [],
+    'service_cost_payer' => Order::PAYER_HALF, // or Order::PAYER_CONSUMER or Order::PAYER_SUPPLIER
 ]);
 
 # All order
@@ -97,10 +96,12 @@ $order = $client->getOrderApi()->cancel([
 ]);
 
 # Close order
-$order = $client->getOrderApi()->close(1);
+$order = $client->getOrderApi()->close(1, [
+    'reason' => 'reason...',
+]);
 
-# Exception order
-$order = $client->getOrderApi()->exception(1, [
+# Escalate order
+$order = $client->getOrderApi()->escalate(1, [
     'reason' => 'reason...',
 ]);
 
@@ -118,5 +119,14 @@ $setting = $client->getSettingApi()->show();
 # Edit setting
 $setting = $client->getSettingApi()->edit([
     'callback_url' => 'https://example.org/callback-order',
+]);
+```
+
+### 3.4: Usage Calculate Api
+```php
+# Calculate
+$setting = $client->getCalculateApi()->calculate([
+    'price' => 1000, 
+    'service_cost_payer' => Order::PAYER_HALF, // or Order::PAYER_CONSUMER or Order::PAYER_SUPPLIER
 ]);
 ```

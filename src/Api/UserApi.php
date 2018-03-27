@@ -68,11 +68,21 @@ class UserApi extends AbstractApi
     }
 
     /**
+     * @param array $params
      * @return array
      */
-    public function all(): array
+    public function all(array $params = []): array
     {
-        $response = $this->get('/users');
+        $resolver = new OptionsResolver();
+        $resolver
+            ->setDefaults([
+                'email' => null,
+            ])
+            ->setAllowedTypes('email', ['string', 'null']);
+
+        $params = array_filter($resolver->resolve($params));
+
+        $response = $this->get('/users', $params);
 
         return $this->getArrayResult($response, new UserDataTransformer());
     }

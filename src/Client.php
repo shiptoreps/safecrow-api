@@ -12,6 +12,7 @@ use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Discovery\UriFactoryDiscovery;
 use Http\Message\RequestFactory;
+use SafeCrow\Api\CalculateApi;
 use SafeCrow\Api\OrderApi;
 use SafeCrow\Api\SettingApi;
 use SafeCrow\Api\UserApi;
@@ -97,6 +98,14 @@ class Client
     public function getSettingApi(): SettingApi
     {
         return new SettingApi($this);
+    }
+
+    /**
+     * @return CalculateApi
+     */
+    public function getCalculateApi(): CalculateApi
+    {
+        return new CalculateApi($this);
     }
 
     /**
