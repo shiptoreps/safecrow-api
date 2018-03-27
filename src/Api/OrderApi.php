@@ -182,9 +182,9 @@ class OrderApi extends AbstractApi
         $resolver = new OptionsResolver();
         $resolver
             ->setRequired([
-                'card_id',
+                'supplier_payout_card_id',
             ])
-            ->setAllowedTypes('card_id', 'int');
+            ->setAllowedTypes('supplier_payout_card_id', 'int');
 
         $params = $resolver->resolve($params);
 

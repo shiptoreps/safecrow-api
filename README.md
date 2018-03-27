@@ -107,7 +107,7 @@ $order = $client->getOrderApi()->escalate(1, [
 
 # Bind card to order 
 $order = $client->getOrderApi()->bind(1, 1, [
-    'card_id' => 1,
+    'supplier_payout_card_id' => 1,
 ]);
 ```
 
@@ -125,7 +125,7 @@ $setting = $client->getSettingApi()->edit([
 ### 3.4: Usage Calculate Api
 ```php
 # Calculate
-$setting = $client->getCalculateApi()->calculate([
+$calculate = $client->getCalculateApi()->calculate([
     'price' => 1000, 
     'service_cost_payer' => Order::PAYER_HALF, // or Order::PAYER_CONSUMER or Order::PAYER_SUPPLIER
 ]);
