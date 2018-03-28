@@ -125,7 +125,7 @@ class UserApi extends AbstractApi
 
         $params = $resolver->resolve($params);
 
-        $response = $this->post('/users/'.$id.'/bind_card', $params);
+        $response = $this->post('/users/'.$id.'/cards', $params);
 
         return $this->getSingleResult($response, 'redirect_url');
     }
