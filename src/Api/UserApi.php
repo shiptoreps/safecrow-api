@@ -77,8 +77,10 @@ class UserApi extends AbstractApi
         $resolver
             ->setDefaults([
                 'email' => null,
+                'phone' => null,
             ])
-            ->setAllowedTypes('email', ['string', 'null']);
+            ->setAllowedTypes('email', ['string', 'null'])
+            ->setAllowedTypes('phone', ['string', 'null']);
 
         $params = array_filter($resolver->resolve($params));
 
