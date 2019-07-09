@@ -100,7 +100,7 @@ class Order
     /**
      * @var array
      */
-    private $extra = [];
+    private $extra;
 
     /**
      * @return int
@@ -333,7 +333,7 @@ class Order
     /**
      * @return array
      */
-    public function getExtra(): array
+    public function getExtra()
     {
         return $this->extra;
     }
@@ -342,7 +342,7 @@ class Order
      * @param array $extra
      * @return Order
      */
-    public function setExtra(array $extra): Order
+    public function setExtra($extra): Order
     {
         $this->extra = $extra;
 
